@@ -11,6 +11,7 @@ import { useEffect } from "react";
 import { fetchInforToJwt } from "./redux/reducer/accountSlice";
 import { useDispatch, useSelector } from "react-redux";
 import AdminHome from "./admin/Home";
+import PhoneSeller from "./seller/phone/Phone";
 
 function App() {
     const account = useSelector((state) => state.account.value);
@@ -29,6 +30,10 @@ function App() {
                 <Routes>
                     <Route path="/" element={<WebLayout />}>
                         <Route index element={<WebHome />}></Route>
+                        <Route
+                            path="/phone"
+                            element={<PhoneSeller></PhoneSeller>}
+                        ></Route>
                     </Route>
                     <Route path="/login" element={<Login></Login>}></Route>
                     <Route path="*" element={<ErrorPage />}></Route>
@@ -57,6 +62,7 @@ function App() {
                 <Routes>
                     <Route path="/seller" element={<DashBoardLayout />}>
                         <Route index element={<SellerHome />}></Route>
+                        <Route path="phone" element={<PhoneSeller />}></Route>
                     </Route>
                     <Route
                         path="/login"

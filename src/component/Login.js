@@ -71,7 +71,7 @@ export default function Login() {
     };
 
     useEffect(() => {
-        if (status === "error") {
+        if (status === "ERR_BAD_REQUEST") {
             setOpen(true);
             setMessage("Username or password is incorrect");
         } else if (status === "success") {
@@ -82,19 +82,25 @@ export default function Login() {
                 setIsloading(false);
                 navigatePage();
             }, 1000);
+        } else if (status == "ERR_NETWORK") {
+            setOpen(true);
+            setMessage("Can't connect to network");
         }
     }, [status]);
 
     return (
         <>
             <Loading isLoading={isLoading}></Loading>
-            {status === "error" && open ? (
+            {status === "ERR_BAD_REQUEST" && open ? (
                 <ErrorAlert {...{ open, handleClose, message }}></ErrorAlert>
             ) : null}
             {status === "success" && open ? (
                 <SuccessAlert
                     {...{ open, handleClose, message }}
                 ></SuccessAlert>
+            ) : null}
+            {status == "ERR_NETWORK" && open ? (
+                <ErrorAlert {...{ open, handleClose, message }}></ErrorAlert>
             ) : null}
             <div
                 style={{
@@ -193,6 +199,18 @@ export default function Login() {
                                     Don't have an account?{" "}
                                     <Link to={"/"} replace>
                                         Sign Up
+                                    </Link>
+                                </Typography>
+                            </Grid>
+                            <Grid
+                                md={12}
+                                xs={12}
+                                display="flex"
+                                justifyContent="center"
+                            >
+                                <Typography sx={{ pt: 2 }}>
+                                    <Link to={"/"} replace>
+                                        Go to home page
                                     </Link>
                                 </Typography>
                             </Grid>

@@ -2,19 +2,24 @@ import {
     AppBar,
     Box,
     Button,
+    Container,
     Divider,
     Drawer,
+    FormControl,
     IconButton,
+    InputAdornment,
     List,
     ListItem,
     ListItemButton,
     ListItemText,
+    OutlinedInput,
     Toolbar,
     Typography,
     useScrollTrigger,
 } from "@mui/material";
 import { cloneElement, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
+import SearchIcon from "@mui/icons-material/Search";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -74,50 +79,81 @@ export default function WebHeader(props) {
         <>
             <ElevationScroll {...props}>
                 <AppBar component={"nav"}>
-                    <Toolbar>
-                        <IconButton
-                            color="inherit"
-                            aria-label="open drawer"
-                            edge="start"
-                            onClick={handleDrawerToggle}
-                            sx={{ mr: 2, display: { sm: "none" } }}
-                        >
-                            <MenuIcon />
-                        </IconButton>
-                        <Typography
-                            variant="h6"
-                            component="div"
-                            sx={{
-                                flexGrow: 1,
-                                display: { xs: "none", sm: "block" },
-                            }}
-                        >
-                            MUI
-                        </Typography>
-                        <Typography
-                            component="div"
-                            sx={{
-                                flexGrow: 5,
-                                display: { xs: "none", sm: "block" },
-                            }}
-                        >
-                            <Box sx={{ display: { xs: "none", sm: "block" } }}>
-                                {navItems.map((item) => (
-                                    <Button key={item} sx={{ color: "#fff" }}>
-                                        {item}
-                                    </Button>
-                                ))}
-                            </Box>
-                        </Typography>
-                        <Box sx={{ display: { xs: "none", sm: "block" } }}>
-                            <Button
-                                sx={{ color: "#fff" }}
-                                onClick={onClickLoginNav}
+                    <Container>
+                        <Toolbar>
+                            <IconButton
+                                color="inherit"
+                                aria-label="open drawer"
+                                edge="start"
+                                onClick={handleDrawerToggle}
+                                sx={{ mr: 2, display: { sm: "none" } }}
                             >
-                                Login
-                            </Button>
-                        </Box>
-                    </Toolbar>
+                                <MenuIcon />
+                            </IconButton>
+                            <Typography
+                                variant="h6"
+                                component="div"
+                                sx={{
+                                    flexGrow: 1,
+                                    display: { xs: "none", sm: "block" },
+                                }}
+                            >
+                                MUI
+                            </Typography>
+                            <Typography
+                                component="div"
+                                sx={{
+                                    flexGrow: 5,
+                                    display: { xs: "none", sm: "block" },
+                                }}
+                            >
+                                <Box
+                                    sx={{
+                                        display: { xs: "none", sm: "block" },
+                                    }}
+                                >
+                                    {navItems.map((item) => (
+                                        <Button
+                                            key={item}
+                                            sx={{ color: "#fff" }}
+                                        >
+                                            {item}
+                                        </Button>
+                                    ))}
+                                </Box>
+                            </Typography>
+                            <Typography
+                                component="div"
+                                sx={{
+                                    flexGrow: 2,
+                                    display: { xs: "none", sm: "block" },
+                                }}
+                            >
+                                <FormControl>
+                                    <OutlinedInput
+                                        sx={{ backgroundColor: "white" }}
+                                        size="small"
+                                        placeholder="Search"
+                                        endAdornment={
+                                            <InputAdornment position="end">
+                                                <IconButton>
+                                                    <SearchIcon />
+                                                </IconButton>
+                                            </InputAdornment>
+                                        }
+                                    ></OutlinedInput>
+                                </FormControl>
+                            </Typography>
+                            <Box sx={{ display: { xs: "none", sm: "block" } }}>
+                                <Button
+                                    sx={{ color: "#fff" }}
+                                    onClick={onClickLoginNav}
+                                >
+                                    Login
+                                </Button>
+                            </Box>
+                        </Toolbar>
+                    </Container>
                 </AppBar>
             </ElevationScroll>
             <nav>

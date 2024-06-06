@@ -32,7 +32,7 @@ export const accountSlice = createSlice({
                 }
             })
             .addCase(fetchLogin.rejected, (state, action) => {
-                state.status = "error";
+                state.status = action.error.code;
             })
             .addCase(fetchInforToJwt.pending, (state, action) => {
                 state.status = "loading";
