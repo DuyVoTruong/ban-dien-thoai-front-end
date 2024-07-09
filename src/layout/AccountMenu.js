@@ -15,7 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { resetAccount } from "../redux/reducer/accountSlice";
 
-export default function AccountMenu() {
+export default function AccountMenu({ colorStyle }) {
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const account = useSelector((state) => state.account.value);
@@ -57,7 +57,9 @@ export default function AccountMenu() {
                         <span
                             style={{
                                 fontSize: "16px",
-                                color: "white",
+                                color: colorStyle?.color
+                                    ? colorStyle.color
+                                    : "white",
                                 marginRight: "10px",
                             }}
                         >

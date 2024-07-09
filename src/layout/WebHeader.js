@@ -11,7 +11,9 @@ import {
     List,
     ListItem,
     ListItemButton,
+    ListItemIcon,
     ListItemText,
+    MenuItem,
     OutlinedInput,
     Toolbar,
     Typography,
@@ -20,8 +22,12 @@ import {
 import { cloneElement, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
+import Logout from "@mui/icons-material/Logout";
 import { Link, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { grey, yellow } from "@mui/material/colors";
+import { resetAccount } from "../redux/reducer/accountSlice";
+import AccountMenu from "./AccountMenu";
 
 function ElevationScroll(props) {
     const { children, window } = props;
@@ -45,6 +51,13 @@ export default function WebHeader(props) {
     const [mobileOpen, setMobileOpen] = useState(false);
     const nav = useNavigate();
     const account = useSelector((state) => state.account.value);
+    const dispatch = useDispatch();
+
+    const handleLogout = () => {
+        localStorage.removeItem("jwt");
+        dispatch(resetAccount());
+        nav("/login", { replace: true });
+    };
 
     const onClickLoginNav = () => {
         nav("/login", { replace: true });
@@ -78,8 +91,11 @@ export default function WebHeader(props) {
     return (
         <>
             <ElevationScroll {...props}>
-                <AppBar component={"nav"}>
-                    <Container>
+                <AppBar
+                    component={"nav"}
+                    style={{ backgroundColor: yellow[700] }}
+                >
+                    <Container style={{ color: grey[800] }}>
                         <Toolbar>
                             <IconButton
                                 color="inherit"
@@ -115,7 +131,7 @@ export default function WebHeader(props) {
                                     {navItems.map((item) => (
                                         <Button
                                             key={item}
-                                            sx={{ color: "#fff" }}
+                                            sx={{ color: grey[800] }}
                                         >
                                             {item}
                                         </Button>
@@ -144,14 +160,24 @@ export default function WebHeader(props) {
                                     ></OutlinedInput>
                                 </FormControl>
                             </Typography>
-                            <Box sx={{ display: { xs: "none", sm: "block" } }}>
-                                <Button
-                                    sx={{ color: "#fff" }}
-                                    onClick={onClickLoginNav}
+                            {account?.role != null ? (
+                                <AccountMenu
+                                    colorStyle={{ color: "black" }}
+                                ></AccountMenu>
+                            ) : (
+                                <Box
+                                    sx={{
+                                        display: { xs: "none", sm: "block" },
+                                    }}
                                 >
-                                    Login
-                                </Button>
-                            </Box>
+                                    <Button
+                                        sx={{ color: grey[800] }}
+                                        onClick={onClickLoginNav}
+                                    >
+                                        Login
+                                    </Button>
+                                </Box>
+                            )}
                         </Toolbar>
                     </Container>
                 </AppBar>

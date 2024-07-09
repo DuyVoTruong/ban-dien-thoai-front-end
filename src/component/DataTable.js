@@ -301,8 +301,12 @@ export default function EnhancedTable(props) {
             (item) => {
                 for (let fieldName in item) {
                     if (fieldName != "id") {
-                        if (item[fieldName].toString().indexOf(search) >= 0) {
-                            return item;
+                        if (item[fieldName] !== null) {
+                            if (
+                                item[fieldName].toString().indexOf(search) >= 0
+                            ) {
+                                return item;
+                            }
                         }
                     }
                 }

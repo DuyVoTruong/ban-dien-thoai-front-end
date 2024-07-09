@@ -17,6 +17,7 @@ const listItemSellerDrawer = [
     {
         icon: <PhoneAndroidIcon />,
         title: "Phone",
+        url: "phone",
         list: [
             {
                 icon: <AddBoxIcon />,

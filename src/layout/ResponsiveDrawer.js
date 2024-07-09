@@ -20,6 +20,7 @@ import AccountMenu from "./AccountMenu";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import { blue, blueGrey, grey, teal } from "@mui/material/colors";
+import { useNavigate } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -29,6 +30,12 @@ export default function ResponsiveDrawer(props) {
     const [isClosing, setIsClosing] = useState(false);
     const [listOpen, setListOpen] = useState(false);
     const [selectedItemDrawer, setSelectedItemDrawer] = useState(null);
+
+    const nav = useNavigate();
+
+    const handleNavigate = (url) => {
+        nav(url, { replace: false });
+    };
 
     const handleDrawerClose = () => {
         setIsClosing(true);
@@ -45,13 +52,14 @@ export default function ResponsiveDrawer(props) {
         }
     };
 
-    const handleClickListOpen = (index, title) => {
+    const handleClickListOpen = (index, title, url) => {
         if (selectedItemDrawer?.index === index) {
             setListOpen(!listOpen);
         } else {
             setListOpen(true);
         }
         handleClickItemDrawer(index, title);
+        handleNavigate(url);
     };
 
     const handleClickItemDrawer = (index, title) => {
@@ -71,7 +79,9 @@ export default function ResponsiveDrawer(props) {
                         <div key={index}>
                             <ListItem
                                 disablePadding
-                                onClick={() => handleClickListOpen(index, null)}
+                                onClick={() =>
+                                    handleClickListOpen(index, null, item.url)
+                                }
                                 selected={
                                     listOpen &&
                                     selectedItemDrawer?.index === index
@@ -107,7 +117,8 @@ export default function ResponsiveDrawer(props) {
                                                     onClick={() =>
                                                         handleClickItemDrawer(
                                                             index,
-                                                            listItem.title
+                                                            listItem.title,
+                                                            null
                                                         )
                                                     }
                                                     selected={

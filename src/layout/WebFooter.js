@@ -53,10 +53,15 @@ export default function WebFooter() {
                         <Grid item sm={1} xs={0}></Grid>
                         <Grid item sm={4} xs={12}>
                             <h1 style={h1Style}>About us</h1>
-                            <p>aalmclamalma</p>
+                            <p style={{ textAlign: "justify" }}>
+                                Chúng tôi cung cấp một dịch vụ mua sắm trực
+                                tuyến nhanh chóng tiện lợi dành cho khách hàng.
+                                {"\n"} Quý khách có thể mua ở bất cứ đâu và được
+                                giao hàng tận nơi miễn phí trong bán kính 10km
+                            </p>
                             <p style={centerStyle}>
                                 <LocalPhoneIcon />
-                                <span style={spanStyle}>+89201920304</span>
+                                <span style={spanStyle}>0366441943</span>
                             </p>
                             <p style={centerStyle}>
                                 <EmailIcon />
@@ -90,7 +95,7 @@ export default function WebFooter() {
                             <Paper component={"form"} sx={{ display: "flex" }}>
                                 <InputBase
                                     sx={{ ml: 1, flex: 2 }}
-                                    placeholder="Search Google Maps"
+                                    placeholder="Enter your questions..."
                                     inputProps={{
                                         "aria-label": "search google maps",
                                     }}
@@ -107,7 +112,12 @@ export default function WebFooter() {
                             <h1 style={h1Style}>Follow us</h1>
                             <Box>
                                 <InstagramIcon sx={{ margin: "10px" }} />
-                                <FacebookIcon sx={{ margin: "10px" }} />
+                                <a
+                                    style={{ color: grey[300] }}
+                                    href="https://web.facebook.com/truongduy.vo.5011"
+                                >
+                                    <FacebookIcon sx={{ margin: "10px" }} />
+                                </a>
                                 <YouTubeIcon sx={{ margin: "10px" }} />
                                 <XIcon sx={{ margin: "10px" }} />
                             </Box>
